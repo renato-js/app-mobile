@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+	<!-- RENATO SANTOS
+		@natojs - Twitter
+		renato-js - github
+		2015
+	 -->
+
+    <!-- Importante -->
+    <title>Acordes</title>  
+    <!-- favicons -->
+    <link rel="shortcut icon" href="favicon.ico">
+    <!-- mobile -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta charset="UTF-8">
+
+    <!-- style css -->
+    <link rel="stylesheet" href="src/css/style.css">
+    <!-- jquery 1.11.1 -->
+    <script type="text/javascript" src="jquery-1.11.1.min.js"></script>
+    <!-- Modernizr 2.0.6 -->
+  
+    <!-- ASSETS -->
+    <link rel="stylesheet" href="assets/font-awesome/font-awesome.min.css">    
+
+
+	<script>
+
+
+		// 
+		function mudarAvon (campoH) {
+			console.log("exec");
+			var table = [
+			['a','a#','b','c','c#','d','d#','e','f','f#','g','g#'],
+			['a#','b','c','c#','d','d#','e','f','f#','g','g#','a'],
+			['b','c','c#','d','d#','e','f','f#','g','g#','a','a#'],
+			['c','c#','d','d#','e','f','f#','g','g#','a','a#','b'],
+			['c#','d','d#','e','f','f#','g','g#','a','a#','b','c'],
+			['d','d#','e','f','f#','g','g#','a','a#','b','c','c#'],
+			['d#','e','f','f#','g','g#','a','a#','b','c','c#','d'],
+			['e','f','f#','g','g#','a','a#','b','c','c#','d','d#'],
+			['f','f#','g','g#','a','a#','b','c','c#','d','d#','e'],
+			['f#','g','g#','a','a#','b','c','c#','d','d#','e','f'],
+			['g','g#','a','a#','b','c','c#','d','d#','e','f','f#'],
+			['g#','a','a#','b','c','c#','d','d#','e','f','f#','g#'],
+
+			];
+
+			var campoH;							// token atual
+			var campoT;							// token destino
+			var variacaoToken;					// variacao entre os intervalos de tempo para logar no blog
+			var campoGet;						// token a se analisar
+			var campoResultado;					// token analisado final
+
+			// analisa situacao token
+			function tokenCreate (arguments) {
+				// token's
+				data1 = document.getElementById("campoH").value;
+				data2 = document.getElementById("campoT").value;	
+				// analisa usuario logado
+				campoH = toNumber(data1);
+				campoT = toNumber(data2);
+				//variacaoToken = campoT - campoH;
+			}
+			// encontra variacao
+			tokenCreate();
+
+			// alert(variacaoAcorde1);
+
+
+			// letra analisada
+			campoGet = document.getElementById("campo1").value;
+			if(campoGet != "") {
+				// coluna x linha
+				campoResultado = convertMatrix(campoH, campoT, campoGet);
+				document.getElementById("campo2").innerHTML = campoResultado+variacaoAcorde1;
+			}
+			
+			// letra analisada
+			campoGet = document.getElementById("campo3").value;
+			if(campoGet != "") {
+				// coluna x linha
+				campoResultado = convertMatrix(campoH, campoT, campoGet);
+				document.getElementById("campo4").innerHTML = campoResultado+variacaoAcorde2;	
+			}
+
+			// letra analisada
+			campoGet = document.getElementById("campo5").value;
+			if(campoGet != "") {
+				// coluna x linha
+				campoResultado = convertMatrix(campoH, campoT, campoGet);
+				document.getElementById("campo6").innerHTML = campoResultado+variacaoAcorde3;	
+			}
+
+			// letra analisada
+			campoGet = document.getElementById("campo7").value;
+			if(campoGet != "") {
+				// coluna x linha
+				campoResultado = convertMatrix(campoH, campoT, campoGet);
+				document.getElementById("campo8").innerHTML = campoResultado+variacaoAcorde4;	
+			}
+
+			// 
+			function convertMatrix (campoH, campoT, campoGet) {
+				
+				var linhaAtual = 0;
+				// busca linha da coluna selecionada
+				for(i=0 ; i<12 ; i++) {
+					if (table[campoH][i] == campoGet) linhaAtual = i;
+				}			
+				var n = table[campoT][linhaAtual];
+				return n;
+			}
+
+			return false;
+
+			// convert for number
+			function toNumber (data) {
+				var n = 999;
+
+				// 
+				for(i=0 ; i<12 ; i++) {
+					if (table[i][0] == data) n = i;
+				}
+
+				return n;
+				return false;
+			}
+
+			// convert for string
+			function toString (data) {
+				// body...
+			}
+		}
+
+
+		// seleciona ao clicar no input
+		function alteraCampos (obj) {
+			mudarAvon();
+		}
+
+		function  selecionaCampos(obj) {
+			obj.select();
+			// body...
+		}
+
+	
+
+		//
+		$(document).ready(function() {
+
+			variacaoAcorde1 = " ";
+			variacaoAcorde2 = " ";
+			variacaoAcorde3 = " ";
+			variacaoAcorde4 = " ";
+
+
+
+			$("input[name='ac1']").click(function(){
+			        variacaoAcorde1 = $('input:radio[name=ac1]:checked').val()
+			        mudarAvon();
+			});
+			$("input[name='ac2']").click(function(){
+			        variacaoAcorde2 = $('input:radio[name=ac2]:checked').val()
+			        mudarAvon();
+			});
+			$("input[name='ac3']").click(function(){
+			        variacaoAcorde3 = $('input:radio[name=ac3]:checked').val()
+			        mudarAvon();
+			});
+			$("input[name='ac4']").click(function(){
+			        variacaoAcorde4 = $('input:radio[name=ac4]:checked').val()
+			        mudarAvon();				
+			});
+		});
+
+
+	</script>
+
+
+</head>
+<body>
+
+	<header>
+		<i class="fa  fa-star-o"></i> Achords Transpor <i class="fa  fa-star-o"></i>
+	</header>
+
+	
+	<form action="#" method="post" onsubmit="return mudarAvon();">
+		<h4>Transpor: </h4>
+		
+		<div class="campoTransporte">
+			<label for="campoH">Base: </label> <input type="text" id="campoH" onclick="selecionaCampos(this)" onkeyup="alteraCampos(this)">
+		</div>
+		<br>
+		<div class="campoTransporte">
+			<label for="campoT">Target: </label> <input type="text" id="campoT" onclick="selecionaCampos(this)" onkeyup="alteraCampos(this)">
+		</div>
+	
+
+		<br>
+	<hr>
+    
+		<div class="box">
+		Tranpor: <input type="text" id="campo1"  onclick="selecionaCampos(this)" onkeyup="alteraCampos(this)">
+		</div>
+		
+		<hr>
+
+		<h4><label>Resultado:</label> 
+		<div id="campo2" class="acorde-final"></div></h4>
+
+
+		
+
+
+
+	</form>
+	
+	
+</body>
+</html>
